@@ -181,5 +181,58 @@ public class BinaryTree {
         root = insert(root, 11);
         root = insert(root, 22);
     }
+    /****************二叉树转换为链表****************/
+    //找到右子树的head,即最小节点
+    private Node getRTHead(Node root){
+        Node rtHead = root;
+        while(true){
+            if(rtHead.left!=null){
+                rtHead = rtHead.left;
+            }else{
+                break;
+            }
+        }
+        return rtHead;
+    }
+    //找到左子树的tail,即最大节点
+    private Node getLTTail(Node root){
+        Node ltTail = root;
+        while(true){
+            if(ltTail.right!=null){
+                ltTail = ltTail.right;
+            }else{
+                break;
+            }
+        }
+        return ltTail;
+    }
+    //转换为双链表结构
+    private void convertToDList(Node root){
+        if(root.left != null){
+            Node tailNode = getLTTail(root.left);
+            convertToDList(root.left);
+            tailNode.right = root;
+            root.left = tailNode;
+        }
+        if(root.right != null){
+            Node headNode = getRTHead(root.right);
+            convertToDList(root.right);
+            headNode.left = root;
+            root.right = headNode;
+        }
+    }
+
+    public void convertToDList(){
+        Node head = root;
+        while (head.left!=null){
+            head = head.left;
+        }
+        convertToDList(root);
+        Node cNode = head;
+        while(cNode.right!=null){
+            System.out.println("cNode.data is: " + cNode.data);
+            cNode=cNode.right;
+        }
+    }
 
 }

@@ -42,4 +42,10 @@ public class BinaryTreeTest extends TestCase {
         Assert.assertEquals(9, size);
     }
 
+    public void testConvertToDList(){
+        BinaryTree bt = new BinaryTree();
+        bt.BuildBTree();
+        bt.convertToDList();
+
+    }
 }
